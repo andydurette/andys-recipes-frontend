@@ -18,7 +18,13 @@ const useStyles = makeStyles({
   },
   divider: {
     width: "100%",
-    marginBottom: '10px',
+    display:'block',
+    paddingBottom: '10px',
+  },
+  secondaryDivider: {
+    width: "75%",
+    display:'block',
+    paddingTop: '10px',
   },
 });
 
@@ -86,7 +92,7 @@ function Recipe() {
       justifyContent="center"
       alignItems="flex-start"
       alignContent="flex-start"
-      style={{ margin: "0 auto", maxWidth: "1200px"}}
+      style={{ margin: "40px auto", maxWidth: "1200px"}}
       xs={10}
     >
         <>
@@ -96,7 +102,7 @@ function Recipe() {
             justifyContent="center"
             alignItems="center"
             xs={12}
-            style={{ marginTop: "75px" }}
+            style={{ marginTop: "5px" }}
           >
             <h1>{recipe.name}</h1>
           </Grid>
@@ -107,7 +113,7 @@ function Recipe() {
             alignItems="center"
             xs={12}
             md={12}
-            style={{ marginTop: "75px" }}
+            style={{ marginTop: "45px" }}
           >
             <img
               className={classes.imgStyles}
@@ -123,46 +129,23 @@ function Recipe() {
             alignItems="center"
             xs={12}
             md={4}
-            style={{ marginTop: "75px", padding: '5px' }}
+            style={{ marginTop: "75px", paddingRight: '10px' }}
           >
             <FormGroup>
+              <Divider className={classes.divider}>
+                <Typography variant="h6">Ingredients</Typography>
+              </Divider>
             
               {recipe.ingredients.map((ingredientList, i) => {
-                if(i === 0){
                   return (<Fragment key={i}>
-                    <Divider className={classes.divider}>
-                      <Typography variant="h6">Ingredients</Typography>
-                    </Divider>
-                    <FormGroup>
-                      <Grid
-                        container
-                        item
-                        justifyContent="center"
-                        alignItems="flex-start"
-                        xs={12}
-                      >
-                        {recipe.ingredients[i].split(",").map((ingredient: string) => {
-                          return (
-                            <FormControlLabel 
-                              key={`ingredient-${ingredient}`}
-                              control={<Checkbox color="secondary" />}
-                              label={ingredient}
-                            />
-                          );
-                        })}
-                      </Grid>              
-                    </FormGroup>
-                  </Fragment>)
-                } else {
-                  return (<Fragment key={i}>
-                    <Divider className={classes.divider}>
+                    <Divider className={classes.secondaryDivider} textAlign="left">
                       <Typography variant="h6">{recipe.ingredients[i].split(",")[0]}</Typography>
                     </Divider>
                     <FormGroup>
                       <Grid
                         container
                         item
-                        justifyContent="center"
+                        justifyContent="flex-start"
                         alignItems="flex-start"
                         xs={12}
                       >
@@ -182,8 +165,7 @@ function Recipe() {
                       </Grid>              
                     </FormGroup>
                   </Fragment>)
-                }
-              }) 
+                })
               }
               
             </FormGroup>
@@ -195,13 +177,13 @@ function Recipe() {
             alignItems="center" 
             xs={12}
             md={8}
-            style={{ marginTop: "75px", padding: '5px' }}>
+            style={{ marginTop: "75px", paddingLeft: '10px' }}>
           <Divider className={classes.divider}>
             <Typography variant="h6">Directions</Typography>
           </Divider>
             {recipe.directions.split("~").map((direction: string, i) => {
               return (
-                <Grid container item xs={12} key={`direction-${i}`}>
+                <Grid container item xs={12} key={`direction-${i}`} style={{marginTop:'15px', marginBottom:'15px'}}>
                   <Grid item xs={12}>
                     <Typography variant="h6">Step {i + 1}</Typography>
                   </Grid>
