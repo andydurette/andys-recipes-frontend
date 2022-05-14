@@ -18,5 +18,5 @@ Features, check marks are done, crosses are features yet to be added
 
 Live View: https://nostoryrecipes.netlify.app/recipes
 
-![markdown-preview-image](assets/markdown-preview-image.jpg)
+![markdown-preview-image](public/content/img/markdown-preview-image.jpg)
 
