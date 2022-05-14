@@ -183,7 +183,7 @@ function Recipe() {
           </Divider>
             {recipe.directions.split("~").map((direction: string, i) => {
               return (
-                <Grid container item xs={12} key={`direction-${i}`} style={{marginTop:'15px', marginBottom:'15px'}}>
+                <Grid container item xs={12} key={`direction-${i}`} style={{marginTop:'11px', marginBottom:'15px'}}>
                   <Grid item xs={12}>
                     <Typography variant="h6">Step {i + 1}</Typography>
                   </Grid>
