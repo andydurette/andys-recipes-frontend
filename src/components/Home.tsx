@@ -12,17 +12,17 @@ import generalTso from '../assets/general_tso.jpg';
 function Home() {
 
   const slideShowArray = [cakePops, eggsBenedict, generalTso];
-  const [displayPosition, setDisplayPosition]:any = useState(0);
+  const [displayPosition, setDisplayPosition] = useState<number>(0);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDisplayPosition((displayPositionState: any) => {
+      setDisplayPosition((displayPositionState:number) => {
         if(displayPositionState < slideShowArray.length - 1){
-          setDisplayPosition(displayPositionState + 1);
-        }else{
-          setDisplayPosition(0)
+          return displayPositionState + 1
+        }else {
+          return 0
         }
       })
     }, 3000);

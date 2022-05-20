@@ -32,6 +32,7 @@ function Login(props: any) {
       setUserData(user);
       try {
         await getAWSTemporaryCreds(user);
+        console.log()
       } catch (error) {
         console.log("error signing in", error);
       }
@@ -56,15 +57,18 @@ function Login(props: any) {
         region: config.REGION,
       }
     );
+    console.log('this fired');
     await refreshCredentials();
   }
 
   async function refreshCredentials(): Promise<void> {
     return new Promise((resolve, reject) => {
+      console.log('this fired2');
       (AWS.config.credentials as Credentials).refresh((err) => {
         if (err) {
           reject(err);
         } else {
+          console.log('this fired3');
           resolve();
         }
       });
@@ -73,7 +77,7 @@ function Login(props: any) {
 
   // Login Setup
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e:React.SyntheticEvent<EventTarget>) => {
     e.preventDefault();
     signIn(username, password);
   };
@@ -105,7 +109,7 @@ function Login(props: any) {
         </Typography>
         <Box
           component="form"
-          onSubmit={(e: any) => handleSubmit(e)}
+          onSubmit={(e:React.SyntheticEvent<EventTarget>) => handleSubmit(e)}
           sx={{
             "& .MuiTextField-root": { m: 1, width: "30ch" },
           }}

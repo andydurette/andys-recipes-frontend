@@ -10,6 +10,15 @@ import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
+interface createRecipe {
+  name: string;
+  cuisine: string;
+  ingredients: [string];
+  description: string;
+  photoURL: string;
+  directions: string;
+}
+
 const useStyles = makeStyles({
   directions: {
     minWidth: 252,
@@ -20,15 +29,14 @@ const useStyles = makeStyles({
   },
 });
 
-function CreateRecipe(props: any) {
+function CreateRecipe() {
   const classes = useStyles();
 
-  // const { userData } = props;
   config.update({
     region: appConfig.REGION,
   });
 
-  const [recipe, setRecipe]: any = useState({
+  const [recipe, setRecipe] = useState<createRecipe>({
     name: "",
     cuisine: "",
     description: "",
@@ -37,7 +45,7 @@ function CreateRecipe(props: any) {
     directions: "",
   });
 
-  const [selectedImage, setSelectedImage] = useState<any>(null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [selectedImageUrl, setSelectedImageUrl] = useState<string>("");
 
 
@@ -54,7 +62,7 @@ function CreateRecipe(props: any) {
     return uploadResult.Location;
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault();
     console.log("Form values");
     console.log(e.target);
@@ -101,7 +109,7 @@ function CreateRecipe(props: any) {
         </Typography>
         <Box
           component="form"
-          onSubmit={(e: any) => handleSubmit(e)}
+          onSubmit={(e:React.SyntheticEvent<EventTarget>) => handleSubmit(e)}
           sx={{
             "& .MuiTextField-root": { m: 1, width: "100%" },
           }}
@@ -176,7 +184,7 @@ function CreateRecipe(props: any) {
                 color="secondary"
                 aria-label="Add ingredient section"
                 component="span"
-                onClick={() => setRecipe((recipeDetails: any) => {
+                onClick={() => setRecipe((recipeDetails: createRecipe) => {
                   if(recipeDetails.ingredients.length >= 6){
                     return recipeDetails
                   }
@@ -194,7 +202,7 @@ function CreateRecipe(props: any) {
                 color="secondary"
                 aria-label="Remove ingredient section"
                 component="span"
-                onClick={() => setRecipe((recipeDetails: any) => {
+                onClick={() => setRecipe((recipeDetails: createRecipe) => {
                   if(recipeDetails.ingredients.length === 1){
                     return recipeDetails
                   }
@@ -209,7 +217,7 @@ function CreateRecipe(props: any) {
                 />
               </IconButton>
             </Grid>
-            {recipe.ingredients.map((_: any, i: number) => (
+            {recipe.ingredients.map((_: string, i: number) => (
               <Grid container item xs={12} key={i}>
                 <TextField
                   required
@@ -218,7 +226,7 @@ function CreateRecipe(props: any) {
                   inputProps={{ maxLength: 300 }}
                   defaultValue=""
                   onChange={(e) =>
-                    setRecipe((recipeDetails: any) => {
+                    setRecipe((recipeDetails: createRecipe) => {
                       let tempRecipeDetails = {...recipeDetails};
                       tempRecipeDetails.ingredients[i] = e.target.value;
                       return tempRecipeDetails;
