@@ -32,7 +32,6 @@ function Login(props: any) {
       setUserData(user);
       try {
         await getAWSTemporaryCreds(user);
-        console.log()
       } catch (error) {
         console.log("error signing in", error);
       }
@@ -57,18 +56,15 @@ function Login(props: any) {
         region: config.REGION,
       }
     );
-    console.log('this fired');
     await refreshCredentials();
   }
 
   async function refreshCredentials(): Promise<void> {
     return new Promise((resolve, reject) => {
-      console.log('this fired2');
       (AWS.config.credentials as Credentials).refresh((err) => {
         if (err) {
           reject(err);
         } else {
-          console.log('this fired3');
           resolve();
         }
       });
