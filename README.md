@@ -17,6 +17,7 @@ Features, check marks are done, crosses are features yet to be added or implemen
 - Adding tests for functionalities ❌
 
 Live View: https://nostoryrecipes.netlify.app
+
 View Backend Repo: https://github.com/andydurette/andys-recipes-backend
 
 ![markdown-preview-image](public/content/img/markdown-preview-image.jpg)
