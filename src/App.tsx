@@ -15,7 +15,6 @@ import Login from "./components/Login";
 // Theme
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Grid } from "@mui/material";
-// import { purple } from '@mui/material/colors';
 
 import { Auth } from 'aws-amplify';
 
@@ -65,6 +64,7 @@ const theme = createTheme({
 
 function App() {
   const [userData, setUserData] = useState<any | null>(null);
+  const [recipes, setRecipes]:any = useState<any | null>(null);
 
   const checkForUser = async () => {
     try {
@@ -101,7 +101,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/recipes" element={<Recipes />} />
+            <Route path="/recipes" element={<Recipes setRecipes={setRecipes} recipes={recipes} />} />
             <Route path="/recipe/:recipeId" element={<Recipe />} />
             {/* Simple security of route */}
             <Route

@@ -13,10 +13,16 @@ const useStyles = makeStyles({
   },
 });
 
-function Recipes() {
+
+type RecipesProps = {
+  setRecipes(): any;
+  recipes: [];
+};
+
+const Recipes:React.FunctionComponent<RecipesProps> = ({...props}) => {
+  const {recipes, setRecipes}:any = props;
   const classes = useStyles();
   const [componentMounted, setComponentMounted] = useState(false);
-  const [recipes, setRecipes] = useState([]);
 
   const getRecipes = useCallback(async () => {
     const requestUrl = appConfig.api.recipesUrl;
@@ -25,14 +31,14 @@ function Recipes() {
     });
     const responseJSON = await requestResult.json();
     setRecipes(responseJSON);
-  }, []);
+  }, [setRecipes]);
 
   useEffect(() => {
-    if (!componentMounted) {
+    if (!componentMounted && !recipes) {
       getRecipes();
       setComponentMounted(true);
     }
-  }, [componentMounted, getRecipes, setComponentMounted]);
+  }, [componentMounted, getRecipes, recipes, setComponentMounted]);
 
   return (
     <Grid
@@ -55,15 +61,8 @@ function Recipes() {
           style={{ margin: "40px auto" }}
           xs={12}
         >
-          {recipes.map(
-            ({
-              name,
-              cuisine,
-              ingredients,
-              recipeId,
-              description,
-              photoURL,
-            }) => {
+          {recipes!.map(
+            (recipe:any) => {
               return (
                 <Grid
                   container
@@ -75,15 +74,15 @@ function Recipes() {
                   sm={6}
                   lg={4}
                   className={classes.gridSpacing}
-                  key={recipeId}
+                  key={recipe.recipeId}
                 >
                   <CreateRecipesCard
-                    name={name}
-                    cuisine={cuisine}
-                    ingredients={ingredients}
-                    recipeId={recipeId}
-                    photoURL={photoURL}
-                    description={description}
+                    name={recipe.name}
+                    cuisine={recipe.cuisine}
+                    ingredients={recipe.ingredients}
+                    recipeId={recipe.recipeId}
+                    photoURL={recipe.photoURL}
+                    description={recipe.description}
                   />
                 </Grid>
               );

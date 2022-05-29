@@ -8,7 +8,6 @@ import noStoryLogo from '../assets/noStoryLogo.svg';
 import cakePops from '../assets/cake_pops.jpg';
 import eggsBenedict from '../assets/eggs_benedict.jpg';
 import generalTso from '../assets/general_tso.jpg';
-import { config as appConfig } from "../services/config";
 
 const useStyles = makeStyles({
   links: {
