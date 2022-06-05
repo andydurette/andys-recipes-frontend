@@ -14,9 +14,13 @@ import Login from "./components/Login";
 
 // Theme
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Grid } from "@mui/material";
 
+// Material Ui
+import { Grid } from "@mui/material";
 import { Auth } from 'aws-amplify';
+
+//Models
+import { RecipeI } from "./model";
 
 const theme = createTheme({
   palette: {
@@ -62,9 +66,10 @@ const theme = createTheme({
   },
 });
 
-function App() {
-  const [userData, setUserData] = useState<any | null>(null);
-  const [recipes, setRecipes]:any = useState<any | null>(null);
+const App: React.FC = () => {
+  
+  const [userData, setUserData] = useState<any>(null);
+  const [recipes, setRecipes] = useState<RecipeI[] | null>(null);
 
   const checkForUser = async () => {
     try {
@@ -101,7 +106,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/recipes" element={<Recipes setRecipes={setRecipes} recipes={recipes} />} />
+            <Route path="/recipes" 
+              element={
+                <Recipes
+                  recipes={recipes} 
+                  setRecipes={setRecipes} 
+                />
+              } 
+            />
             <Route path="/recipe/:recipeId" element={<Recipe />} />
             {/* Simple security of route */}
             <Route
