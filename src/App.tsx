@@ -23,7 +23,6 @@ import { Auth } from 'aws-amplify';
 //Models
 import { RecipeInterface } from "./model";
 
-
 const App: React.FC = () => {
   
   const [userData, setUserData] = useState<any>(null);
