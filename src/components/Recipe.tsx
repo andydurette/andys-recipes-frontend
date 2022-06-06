@@ -38,7 +38,7 @@ interface ReceivedRecipe {
   directions: string;
 }
 
-function Recipe() {
+const Recipe:React.FC = () => {
   const { recipeId } = useParams();
   const classes = useStyles();
   const [componentMounted, setComponentMounted] = useState(false);

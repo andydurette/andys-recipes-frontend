@@ -31,10 +31,12 @@ const useStyles = makeStyles({
   }
 });
 
+
+
 interface Props {
   name: string, 
   cuisine: string,
-  ingredients: string,
+  ingredients: [string],
   recipeId: string,
   description: string,
   photoURL: string,

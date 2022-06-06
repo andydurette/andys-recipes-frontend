@@ -13,58 +13,21 @@ import CreateRecipe from "./components/CreateRecipe";
 import Login from "./components/Login";
 
 // Theme
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Grid } from "@mui/material";
+import theme from "./AppTheme";
+import { ThemeProvider } from "@mui/material/styles";
 
+// Material Ui
+import { Grid } from "@mui/material";
 import { Auth } from 'aws-amplify';
 
-const theme = createTheme({
-  palette: {
-    mode: "dark",
-    background: {
-      default: "#2d2d37",
-      paper: "#212226",
-    },
-    text: {
-      primary: "#ffffff",
-    },
-    primary: {
-      main: "#000",
-    },
-    secondary: {
-      main: "#fff",
-    },
-  },
-  typography: {
-    allVariants: {
-      color: "white",
-    },
-  },
-  components: {
-    MuiAppBar: {
-      styleOverrides: {
-        colorPrimary: {
-          backgroundColor: "#000",
-          color: "#000",
-        },
-      },
-    },
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          fontWeight: "bold",
-          "&.Mui-focused": {
-            color: "white",
-          },
-        },
-      },
-    },
-  },
-});
+//Models
+import { RecipeInterface } from "./model";
 
-function App() {
-  const [userData, setUserData] = useState<any | null>(null);
-  const [recipes, setRecipes]:any = useState<any | null>(null);
+
+const App: React.FC = () => {
+  
+  const [userData, setUserData] = useState<any>(null);
+  const [recipes, setRecipes] = useState<RecipeInterface[] | null>(null);
 
   const checkForUser = async () => {
     try {
@@ -101,7 +64,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/recipes" element={<Recipes setRecipes={setRecipes} recipes={recipes} />} />
+            <Route path="/recipes" 
+              element={
+                <Recipes
+                  recipes={recipes} 
+                  setRecipes={setRecipes} 
+                />
+              } 
+            />
             <Route path="/recipe/:recipeId" element={<Recipe />} />
             {/* Simple security of route */}
             <Route

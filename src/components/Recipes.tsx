@@ -1,10 +1,12 @@
 //TODO: Come back and make typescript
 import { Grid } from "@mui/material";
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { config as appConfig } from "../services/config";
 import CreateRecipesCard from "./RecipesCard";
 import { makeStyles } from "@mui/styles";
 import CircularProgress from '@mui/material/CircularProgress';
+//Models
+import { RecipeInterface } from "../model";
 
 const useStyles = makeStyles({
   gridSpacing: {
@@ -13,14 +15,13 @@ const useStyles = makeStyles({
   },
 });
 
-
-type RecipesProps = {
-  setRecipes(): any;
-  recipes: [];
+interface Props {
+  recipes: RecipeInterface[] | null;
+  setRecipes: React.Dispatch<React.SetStateAction<RecipeInterface[] | null>>;
 };
 
-const Recipes:React.FunctionComponent<RecipesProps> = ({...props}) => {
-  const {recipes, setRecipes}:any = props;
+const Recipes:React.FC<Props> = ({recipes, setRecipes}) => {
+
   const classes = useStyles();
   const [componentMounted, setComponentMounted] = useState(false);
 
@@ -62,7 +63,8 @@ const Recipes:React.FunctionComponent<RecipesProps> = ({...props}) => {
           xs={12}
         >
           {recipes!.map(
-            (recipe:any) => {
+            ({recipeId, name, cuisine, ingredients,
+              photoURL, description}:RecipeInterface) => {
               return (
                 <Grid
                   container
@@ -74,15 +76,15 @@ const Recipes:React.FunctionComponent<RecipesProps> = ({...props}) => {
                   sm={6}
                   lg={4}
                   className={classes.gridSpacing}
-                  key={recipe.recipeId}
+                  key={recipeId}
                 >
                   <CreateRecipesCard
-                    name={recipe.name}
-                    cuisine={recipe.cuisine}
-                    ingredients={recipe.ingredients}
-                    recipeId={recipe.recipeId}
-                    photoURL={recipe.photoURL}
-                    description={recipe.description}
+                    name={name}
+                    cuisine={cuisine}
+                    ingredients={ingredients}
+                    recipeId={recipeId}
+                    photoURL={photoURL}
+                    description={description}
                   />
                 </Grid>
               );
