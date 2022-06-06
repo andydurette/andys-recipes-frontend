@@ -13,8 +13,8 @@ import CreateRecipe from "./components/CreateRecipe";
 import Login from "./components/Login";
 
 // Theme
-// import theme from "./AppTheme";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import theme from "./AppTheme";
+import { ThemeProvider } from "@mui/material/styles";
 
 // Material Ui
 import { Grid } from "@mui/material";
@@ -36,6 +36,7 @@ const App: React.FC = () => {
     } catch(err) {
       console.log(err);
     }
+    
   }
 
   useEffect(() => {
@@ -45,50 +46,6 @@ const App: React.FC = () => {
     checkForUser();
     }
   }, []);
-
-  const theme = createTheme({
-    palette: {
-      mode: "dark",
-      background: {
-        default: "#2d2d37",
-        paper: "#212226",
-      },
-      text: {
-        primary: "#ffffff",
-      },
-      primary: {
-        main: "#000",
-      },
-      secondary: {
-        main: "#fff",
-      },
-    },
-    typography: {
-      allVariants: {
-        color: "white",
-      },
-    },
-    components: {
-      MuiAppBar: {
-        styleOverrides: {
-          colorPrimary: {
-            backgroundColor: "#000",
-            color: "#000",
-          },
-        },
-      },
-      MuiInputLabel: {
-        styleOverrides: {
-          root: {
-            fontWeight: "bold",
-            "&.Mui-focused": {
-              color: "white",
-            },
-          },
-        },
-      },
-    },
-  });
 
   return (
     <div className="App">
