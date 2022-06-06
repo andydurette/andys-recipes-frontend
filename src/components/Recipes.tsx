@@ -6,7 +6,7 @@ import CreateRecipesCard from "./RecipesCard";
 import { makeStyles } from "@mui/styles";
 import CircularProgress from '@mui/material/CircularProgress';
 //Models
-import { RecipeI } from "../model";
+import { RecipeInterface } from "../model";
 
 const useStyles = makeStyles({
   gridSpacing: {
@@ -16,8 +16,8 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  recipes: RecipeI[] | null;
-  setRecipes: React.Dispatch<React.SetStateAction<RecipeI[] | null>>;
+  recipes: RecipeInterface[] | null;
+  setRecipes: React.Dispatch<React.SetStateAction<RecipeInterface[] | null>>;
 };
 
 const Recipes:React.FC<Props> = ({recipes, setRecipes}) => {
@@ -63,7 +63,8 @@ const Recipes:React.FC<Props> = ({recipes, setRecipes}) => {
           xs={12}
         >
           {recipes!.map(
-            (recipe:any) => {
+            ({recipeId, name, cuisine, ingredients,
+              photoURL, description}:RecipeInterface) => {
               return (
                 <Grid
                   container
@@ -75,15 +76,15 @@ const Recipes:React.FC<Props> = ({recipes, setRecipes}) => {
                   sm={6}
                   lg={4}
                   className={classes.gridSpacing}
-                  key={recipe.recipeId}
+                  key={recipeId}
                 >
                   <CreateRecipesCard
-                    name={recipe.name}
-                    cuisine={recipe.cuisine}
-                    ingredients={recipe.ingredients}
-                    recipeId={recipe.recipeId}
-                    photoURL={recipe.photoURL}
-                    description={recipe.description}
+                    name={name}
+                    cuisine={cuisine}
+                    ingredients={ingredients}
+                    recipeId={recipeId}
+                    photoURL={photoURL}
+                    description={description}
                   />
                 </Grid>
               );
