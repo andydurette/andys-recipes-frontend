@@ -15,6 +15,9 @@ Features, check marks are done, crosses are features yet to be added or implemen
 - Add images to display with recipes from an S3 bucket. ✅
 - Proper Integration of typescript into code ✅
 - Adding tests for functionalities ❌
+- Move to amplify hosting instead of netlify ❌
+- Setup redux toolkit for state management ❌
+- Replace current api gateway for appsync graphql ❌
 
 Live View: https://nostoryrecipes.netlify.app                          
 View Backend Repo: https://github.com/andydurette/andys-recipes-backend
